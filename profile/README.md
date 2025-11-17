@@ -10,7 +10,7 @@ The packages cover URI handling, email formats, HTTP headers, form data, authent
 
 ## Implementation Areas
 
-**URI Standards**
+**URI Standard**
 RFC 3986 (URI syntax), RFC 3987 (internationalized URIs), RFC 6570 (URI templates). Full parsing, manipulation, and template expansion with compile-time variable validation.
 
 **Email Standards**
@@ -25,7 +25,7 @@ RFC 2388/7578 (multipart form data), WHATWG URL encoding. Hierarchical data stru
 **Authentication**
 RFC 7519 (JWT), RFC 6238 (TOTP), RFC 6750 (OAuth Bearer), RFC 7617 (Basic Auth). Token validation, two-factor authentication, credential handling.
 
-**Domain Names**
+**Domain standards**
 RFC 1035 (DNS), RFC 1123 (hostnames), RFC 5321 (SMTP domains). Multi-RFC validation with automatic format detection, subdomain operations.
 
 **Syndication**
@@ -37,7 +37,7 @@ RFC 4287 (Atom), RSS 2.0, JSON Feed. Feed parsing and generation with type-safe 
 
 All implementations use Swift's type system for validation. Invalid data structures are rejected at compile time rather than runtime. Types compose across packages—email addresses work with SMTP types, URI templates integrate with routing systems, domain validation combines with email validation.
 
-Packages are framework-independent. They work with Vapor, Hummingbird, or any Swift server framework. Each package focuses on a single standard with minimal dependencies.
+Packages are framework-independent. Each package focuses on a single standard with minimal dependencies.
 
 ## Requirements
 
@@ -47,9 +47,3 @@ Packages are framework-independent. They work with Vapor, Hummingbird, or any Sw
 ## License
 
 All packages use Apache License 2.0.
-
-## Related Projects
-
-- [swift-html](https://github.com/coenttb/swift-html) - Type-safe HTML generation
-- [swift-identities](https://github.com/coenttb/swift-identities) - Authentication infrastructure
-- [coenttb-com-server](https://github.com/coenttb/coenttb-com-server) - Production server implementation
