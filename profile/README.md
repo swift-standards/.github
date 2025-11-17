@@ -1,88 +1,55 @@
-# Swift Web Standards
+# Swift Standards
 
-**Building Swift's Web Foundation**
+Type-safe implementations of internet standards (RFCs) as Swift packages.
 
-The web runs on standards—RFCs that define how URLs work, how email is formatted, how HTTP requests are structured. But for Swift developers, these standards have been locked behind string parsing and runtime validation. Until now.
+## Overview
 
-Swift Web Standards implements internet protocols as type-safe Swift packages. Not approximations. Not wrappers. Full RFC compliance with compile-time guarantees.
+Swift Standards provides RFC-compliant implementations of web protocols and data formats. Each package implements a specific internet standard with Swift's type system, enabling compile-time validation instead of runtime string parsing.
 
-## Why This Exists
+The packages cover URI handling, email formats, HTTP headers, form data, authentication protocols, and syndication feeds. All packages use Swift 6.0 strict concurrency and maintain zero dependencies where possible.
 
-Every web framework reinvents the same wheels. URL parsing. Email validation. Form data handling. HTTP header parsing. Each implementation slightly different, each validated at runtime, each catching errors when it's too late.
+## Implementation Areas
 
-The problem isn't that these solutions work poorly. The problem is they work at runtime, when the cost of failure is highest. They validate when they should prevent. They parse when they should compose.
+**URI Standards**
+RFC 3986 (URI syntax), RFC 3987 (internationalized URIs), RFC 6570 (URI templates). Full parsing, manipulation, and template expansion with compile-time variable validation.
 
-Swift's type system can do better. The language that brought us type-safe UI construction, type-safe database queries, and type-safe concurrency can bring the same guarantees to internet standards.
+**Email Standards**
+RFC 5322 (message format), RFC 5321 (SMTP), RFC 6531 (internationalized email). Address validation across multiple RFC formats, message composition, header management.
 
-## What We're Building
+**HTTP Standards**
+RFC 7230/7231 (HTTP/1.1), RFC 2045/2046 (MIME), RFC 2183 (Content-Disposition), RFC 6265 (cookies). Header parsing, content type handling, multipart messages.
 
-We implement RFCs as pure Swift types. Each standard becomes a package with compile-time guarantees:
+**Form Data**
+RFC 2388/7578 (multipart form data), WHATWG URL encoding. Hierarchical data structures with multiple parsing strategies, file upload handling.
 
-**URI Standards** - Parse, manipulate, and generate URIs with full RFC 3986, 3987, and 6570 compliance. URI templates become type-safe with variable expansion validated at compile time.
+**Authentication**
+RFC 7519 (JWT), RFC 6238 (TOTP), RFC 6750 (OAuth Bearer), RFC 7617 (Basic Auth). Token validation, two-factor authentication, credential handling.
 
-**Email Standards** - Email addresses validated across multiple RFCs (5322, 5321, 6531) without regex. Message composition with proper header ordering. International email support built in.
+**Domain Names**
+RFC 1035 (DNS), RFC 1123 (hostnames), RFC 5321 (SMTP domains). Multi-RFC validation with automatic format detection, subdomain operations.
 
-**HTTP Standards** - Content-Type parsing, Content-Disposition handling, multipart messages, cookies. All the HTTP building blocks with types instead of strings.
+**Syndication**
+RFC 4287 (Atom), RSS 2.0, JSON Feed. Feed parsing and generation with type-safe structures.
 
-**Form Data** - Hierarchical form data structures that parse and encode with multiple strategies. File uploads with proper MIME types. No more manual string manipulation.
+34 total packages. Each independently tested and documented.
 
-**Authentication** - JWT parsing and validation, TOTP for two-factor auth, OAuth bearer tokens, Basic authentication. Security primitives without the security vulnerabilities.
+## Technical Approach
 
-**Domain Names** - Multi-RFC domain validation that automatically detects which standards apply. Subdomain operations that can't create invalid domains.
+All implementations use Swift's type system for validation. Invalid data structures are rejected at compile time rather than runtime. Types compose across packages—email addresses work with SMTP types, URI templates integrate with routing systems, domain validation combines with email validation.
 
-**And More** - Feed formats (Atom, RSS, JSON Feed), mailing list headers, WHATWG standards for modern web compatibility.
+Packages are framework-independent. They work with Vapor, Hummingbird, or any Swift server framework. Each package focuses on a single standard with minimal dependencies.
 
-34 packages total. Each production-ready, extensively tested, fully documented. Zero dependencies where possible. Swift 6.0 strict concurrency throughout.
+## Requirements
 
-## What This Approach Enables
+- Swift 6.0+
+- macOS 13.0+ / iOS 16.0+ / Linux
 
-**Catch Errors at Compile Time** - Invalid URLs, malformed emails, incorrect header formats—all caught before your code runs. Not with linters or analyzers, but with Swift's type system doing what it does best.
+## License
 
-**Composable Primitives** - Small, focused packages that work together. Email addresses compose with SMTP types. URI templates compose with HTTP routing. Domain validation composes with email validation. Build complex systems from simple, correct parts.
+All packages use Apache License 2.0.
 
-**Framework Independence** - These aren't tied to Vapor, Hummingbird, or any specific framework. They're foundation layers that any server-side Swift project can build on. Implement a standard once, use it everywhere.
+## Related Projects
 
-**Production Confidence** - When your types guarantee RFC compliance, you don't write defensive code checking for edge cases. You write straightforward code that the compiler proves correct.
-
-**Better APIs** - Type-safe primitives enable better framework APIs. Routing can use URI templates with compile-time variable validation. Email libraries can guarantee valid addresses. Form handlers can work with structured data instead of string dictionaries.
-
-## Philosophy
-
-We believe Swift deserves implementations that are:
-- **Correct** - Full RFC compliance, not "good enough"
-- **Safe** - Compile-time guarantees eliminate entire classes of errors
-- **Fast** - Zero runtime overhead, optimal performance
-- **Modern** - Swift 6.0 concurrency, latest language features
-- **Composable** - Small, focused packages that work together
-
-The web's foundation shouldn't require runtime validation. Type-safe primitives make wrong things impossible and right things obvious.
-
-## Impact
-
-These packages power production systems:
-- **[coenttb-com-server](https://github.com/coenttb/coenttb-com-server)** - 100% Swift website, type-safe from database to DOM
-- **[swift-html](https://github.com/coenttb/swift-html)** - Type-safe HTML generation
-- **[swift-identities](https://github.com/coenttb/swift-identities)** - Complete authentication system
-- Server-side Swift applications across email, forms, and routing
-
-By implementing standards correctly once, we enable entire ecosystems to build with confidence.
-
-## Vision
-
-Swift has proven itself on Apple platforms. Server-side Swift is proving itself in production. But the web's foundation—URL parsing, email validation, HTTP handling—remains fragmented across frameworks.
-
-We're building the standard library Swift's web ecosystem deserves. Type-safe primitives that make it impossible to generate invalid URLs, impossible to create malformed emails, impossible to parse data incorrectly.
-
-Every RFC implementation removes complexity from every framework built on top. Every type-safe abstraction prevents errors before they happen. Every package proves Swift belongs on the server.
-
-**The web runs on standards. Those standards should run on types.**
-
-## Get Involved
-
-Browse our repositories to see implementations of specific RFCs. Each package is independently useful and designed to compose with others.
-
-All packages are Apache 2.0 licensed—maximum compatibility for both open source and commercial projects.
-
----
-
-*Founded by [Coen ten Thije Boonkkamp](https://github.com/coenttb) • Building in public • One RFC at a time*
+- [swift-html](https://github.com/coenttb/swift-html) - Type-safe HTML generation
+- [swift-identities](https://github.com/coenttb/swift-identities) - Authentication infrastructure
+- [coenttb-com-server](https://github.com/coenttb/coenttb-com-server) - Production server implementation
