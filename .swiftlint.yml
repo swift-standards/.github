@@ -1,0 +1,32 @@
+# Tier 2 — swift-standards layer-anchor SwiftLint configuration.
+#
+# Intentionally empty per [CI-004a] — the layer-wrapper "thin pass-through"
+# pattern. Future layer-specific lint rules accumulate here as L2 invariants
+# are identified (e.g., spec-version pin lint, authority-attribution lint).
+# At v0 the layer-anchor exists structurally but carries no rules of its
+# own; consumers inherit Tier 1 ecosystem-wide rules transparently through
+# the parent_config chain below.
+#
+# Inherits from the swift-institute Tier 1 ecosystem-wide canonical:
+#
+#   parent_config: https://raw.githubusercontent.com/swift-institute/.github/main/.swiftlint.yml
+#
+# Per-sub-package .swiftlint.yml files in swift-standards/swift-*-standard/
+# (and the L2 spec-authority sub-orgs swift-ietf, swift-iso, swift-w3c,
+# swift-whatwg, swift-ecma, swift-incits, swift-ieee, swift-iec,
+# swift-arm-ltd, swift-intel, swift-riscv) inherit from THIS file via:
+#
+#   parent_config: https://raw.githubusercontent.com/swift-standards/.github/main/.swiftlint.yml
+#
+# Per [CI-004b], L2 spec-authority sub-org repos route through this layer-
+# anchor — there are no per-authority .swiftlint.yml files at the sub-org
+# `.github` level (the same architectural reasoning that gates per-authority
+# wrapper workflows under the workflow_call 4-level limit applies in spirit
+# to lint config-inheritance hops: keep the chain short until layer-specific
+# rules emerge that justify another tier).
+#
+# Provenance: swift-institute/Research/ci-uniformity-audit.md v1.0.0 §D4
+# (D4 finalization — closes the UNINTENTIONAL-DRIFT axis for L2
+# .swiftlint.yml absence vs L1 baseline).
+
+parent_config: https://raw.githubusercontent.com/swift-institute/.github/main/.swiftlint.yml
