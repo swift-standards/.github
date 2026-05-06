@@ -1,0 +1,84 @@
+name: Swift CI (standards layer)
+
+# Layer wrapper for swift-institute/.github/.github/workflows/swift-ci.yml.
+#
+# Encodes the L2 layer's structural anchor in the org-hierarchy-mirroring
+# CI architecture per [CI-004a]. Currently a thin pass-through to the
+# universal reusable; layer-specific jobs (e.g., spec-version pin lint,
+# authority-attribution lint) accumulate as L2 invariants are identified.
+#
+# Consume from a caller package's .github/workflows/ci.yml via:
+#
+#   jobs:
+#     ci:
+#       uses: swift-standards/.github/.github/workflows/swift-ci.yml@main
+#       secrets: inherit
+#
+# Default `enable-private-repos: true` covers the canonical L2 case (most
+# standards consumers depend on private intra-Institute siblings); pass
+# `with: { enable-private-repos: false }` only for the rare public-only
+# consumer that wants to suppress the configure-git step. `secrets:
+# inherit` is uniform across all consumers per [CI-031]/[CI-058]/[CI-059].
+#
+# Sub-org repos in swift-ietf, swift-iso, swift-w3c, swift-whatwg,
+# swift-ecma, swift-incits, swift-ieee, swift-iec, swift-arm-ltd,
+# swift-intel, swift-riscv ALSO route through THIS wrapper per [CI-004b]
+# (per-authority sub-org wrappers blocked by GitHub Actions workflow_call
+# 4-level depth limit; sub-org repos route through their parent layer
+# wrapper until the limit relaxes or the universal is refactored to
+# inline its advisory linters as steps).
+#
+# Provenance: swift-institute/Research/ci-cd-cross-ecosystem-reuse.md
+# v1.1.1 (2026-05-06, Tier 2 RECOMMENDATION).
+
+on:
+  workflow_call:
+    inputs:
+      swift-version:
+        type: string
+        default: "6.3"
+        description: "Swift stable floor propagated to the universal matrix. The nightly job is always 6.4-dev."
+      enable-private-repos:
+        type: boolean
+        default: true
+        description: "If true, configure git to use PRIVATE_REPO_TOKEN for github.com clones. Default true: most L2 consumers depend on private intra-Institute deps."
+      macos-runner:
+        type: string
+        default: "macos-26"
+        description: "macOS runner image. Bump annually when GitHub adds a new image version. env.* is invalid in runs-on: per Actions context-availability rules — input is the working centralization mechanism."
+    secrets:
+      PRIVATE_REPO_TOKEN:
+        required: false
+
+jobs:
+  # Universal matrix delegated to the ecosystem-wide reusable. L2-specific
+  # invariants (none today) would land as additional jobs alongside this.
+  matrix:
+    if: ${{ !github.event.repository.private }}
+    uses: swift-institute/.github/.github/workflows/swift-ci.yml@main
+    with:
+      swift-version: ${{ inputs.swift-version }}
+      enable-private-repos: ${{ inputs.enable-private-repos }}
+      macos-runner: ${{ inputs.macos-runner }}
+    secrets:
+      PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+
+  # Conclusion aggregator — single required-status-check name for branch
+  # protection on swift-standards consumer repos. Mirrors the universal
+  # swift-ci.yml's ci-ok job; here, the only need is `matrix` (which itself
+  # reflects the universal workflow's success aggregate).
+  ci-ok:
+    if: ${{ always() && !github.event.repository.private }}
+    needs:
+      - matrix
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Aggregate required-job results
+        env:
+          NEEDS_JSON: ${{ toJson(needs) }}
+        run: |
+          set -euo pipefail
+          # success or skipped → pass; failure or cancelled → fail.
+          jq --exit-status 'all(.result == "success" or .result == "skipped")' <<< "$NEEDS_JSON"
