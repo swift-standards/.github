@@ -1,0 +1,19 @@
+# swift-standards org-level metadata.
+#
+# swift-standards is the umbrella org for cross-cutting standards work and the
+# notional parent of the standards-body sub-orgs (swift-ietf, swift-iso,
+# swift-ieee, swift-iec, swift-w3c, swift-whatwg, swift-ecma, swift-incits).
+# Each sub-org carries the same socialPreview brand for visual cohesion;
+# authority differentiation is in the package name (e.g., swift-rfc-4122).
+#
+# Schema mirrors per-repo .github/metadata.yaml. Read by social-preview.sh.
+
+description: "Specification implementations for Swift."
+homepage: "https://swift-institute.org"
+
+socialPreview:
+  accent:
+    from: "#A8AEB8"   # silver gradient top
+    to: "#4D5664"     # silver gradient bottom
+    text: "#4D5664"   # caption ink
+  caption: "STANDARDS"
