@@ -30,10 +30,12 @@ name: Swift DocC (standards layer)
 #
 # Sub-org consumers (swift-ietf, swift-iso, swift-w3c, swift-whatwg,
 # swift-ecma, swift-incits, swift-ieee, swift-iec, swift-arm-ltd,
-# swift-intel, swift-riscv) MUST NOT be pointed at this wrapper: their
-# hop into it is itself cross-org, so `secrets: inherit` would drop
-# their org secrets at hop 1 — the same gap this wrapper exists to fix.
-# Sub-org docs routing is pending its own phase decision.
+# swift-intel, swift-riscv) route HERE with the EXPLICIT `secrets:`
+# block per the [CI-059] sub-org caveat — forwarding PRIVATE_REPO_TOKEN
+# + SWIFT_INSTITUTE_BOT_APP_CLIENT_ID/_APP_ID/_APP_PRIVATE_KEY as
+# `NAME: ${{ secrets.NAME }}` lines. Their hop into this wrapper is
+# cross-org, so `secrets: inherit` would deliver nothing ([CI-109]);
+# explicit VALUES survive the hop, resolved in the consumer's own org.
 #
 # Chain depth: consumer ci.yml -> this wrapper -> universal swift-docs.yml
 # = 3 levels, within the workflow_call 4-level limit (the universal docs

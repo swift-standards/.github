@@ -18,7 +18,11 @@ name: Swift CI (standards layer)
 # standards consumers depend on private intra-Institute siblings); pass
 # `with: { enable-private-repos: false }` only for the rare public-only
 # consumer that wants to suppress the configure-git step. `secrets:
-# inherit` is uniform across all consumers per [CI-031]/[CI-058]/[CI-059].
+# inherit` is uniform across LAYER-ORG consumers per
+# [CI-031]/[CI-058]/[CI-059]; SUB-ORG consumers explicit-forward the
+# named credential set instead per the [CI-059] sub-org caveat
+# ([CI-109] — their hop into this wrapper is cross-org and inherit
+# would deliver nothing).
 #
 # Sub-org repos in swift-ietf, swift-iso, swift-w3c, swift-whatwg,
 # swift-ecma, swift-incits, swift-ieee, swift-iec, swift-arm-ltd,
