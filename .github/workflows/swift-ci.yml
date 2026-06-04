@@ -41,7 +41,7 @@ on:
       enable-private-repos:
         type: boolean
         default: true
-        description: "If true, configure git to use PRIVATE_REPO_TOKEN for github.com clones. Default true: most L2 consumers depend on private intra-Institute deps."
+        description: "If true, configure credentialed git url rewrites (App-token primary, PRIVATE_REPO_TOKEN fallback) for github.com clones. Default true: most L2 consumers depend on private intra-Institute deps."
       macos-runner:
         type: string
         default: "macos-26"
@@ -49,6 +49,27 @@ on:
     secrets:
       PRIVATE_REPO_TOKEN:
         required: false
+        description: |
+          Legacy github.com-wide fallback credential for private-dep
+          clones. Superseded by the App-token path; retained for orgs
+          not yet provisioned with the App secrets.
+      SWIFT_INSTITUTE_BOT_APP_CLIENT_ID:
+        required: false
+        description: |
+          swift-institute-bot App Client ID (org-level secret; preferred
+          name era). With the private key, lets configure-private-repos
+          mint per-job contents:read installation tokens for the layer
+          orgs so `swift package resolve` can clone private deps.
+      SWIFT_INSTITUTE_BOT_APP_ID:
+        required: false
+        description: |
+          Legacy-era App ID secret name carried by some orgs (numeric
+          App ID value class). Accepted as fallback when _APP_CLIENT_ID
+          is absent; client-id wins when both exist.
+      SWIFT_INSTITUTE_BOT_APP_PRIVATE_KEY:
+        required: false
+        description: |
+          swift-institute-bot App private key (org-level secret).
 
 jobs:
   # Universal matrix delegated to the ecosystem-wide reusable. L2-specific
@@ -62,6 +83,9 @@ jobs:
       macos-runner: ${{ inputs.macos-runner }}
     secrets:
       PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+      SWIFT_INSTITUTE_BOT_APP_CLIENT_ID: ${{ secrets.SWIFT_INSTITUTE_BOT_APP_CLIENT_ID }}
+      SWIFT_INSTITUTE_BOT_APP_ID: ${{ secrets.SWIFT_INSTITUTE_BOT_APP_ID }}
+      SWIFT_INSTITUTE_BOT_APP_PRIVATE_KEY: ${{ secrets.SWIFT_INSTITUTE_BOT_APP_PRIVATE_KEY }}
 
   # Conclusion aggregator — single required-status-check name for branch
   # protection on swift-standards consumer repos. Mirrors the universal
