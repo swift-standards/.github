@@ -17,3 +17,5 @@ socialPreview:
     to: "#4D5664"     # silver gradient bottom
     text: "#4D5664"   # caption ink
   caption: "STANDARDS"
+readme:
+  family: G
