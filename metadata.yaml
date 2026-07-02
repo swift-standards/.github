@@ -19,3 +19,13 @@ socialPreview:
   caption: "STANDARDS"
 readme:
   family: G
+
+# Org-account profile fields (display name, description, email, website, X, location).
+# Applied via `gh api -X PATCH /orgs/<org>`; no org-level sync workflow exists yet.
+org:
+  name: "Swift Standards"
+  description: "Swift implementations of international standards — Layer 2 of the Swift Institute ecosystem."
+  email: "coen@coenttb.com"
+  blog: "https://swift-institute.org"
+  twitter: "coenttb"
+  location: "Netherlands"
