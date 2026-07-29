@@ -44,10 +44,6 @@ dependencies: [
 
 The per-authority organizations follow the same one-repo-per-package convention. See each package's README for current version and Swift requirements.
 
-## Status
-
-Public alpha. Composition packages are under active development; per-authority organizations are live and filling out.
-
 Maintained by [Coen ten Thije Boonkkamp](https://github.com/coenttb) — contributions welcome via pull request.
 
 ## License
