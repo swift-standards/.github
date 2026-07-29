@@ -18,31 +18,19 @@ Each standards authority has its own GitHub organization hosting the specificati
 | [swift-whatwg](https://github.com/swift-whatwg) | WHATWG — HTML, the URL Living Standard |
 | [swift-ieee](https://github.com/swift-ieee) · [swift-iec](https://github.com/swift-iec) · [swift-ecma](https://github.com/swift-ecma) · [swift-incits](https://github.com/swift-incits) · [swift-arm-ltd](https://github.com/swift-arm-ltd) · [swift-intel](https://github.com/swift-intel) · [swift-microsoft](https://github.com/swift-microsoft) · swift-riscv (pending) | Single-package organizations |
 
-## Unified packages in this organization
+## Browse the packages
 
-Where several specifications govern the same subject, a `swift-*-standard` package here composes them into one canonical Swift representation. [swift-standards](https://github.com/swift-standards/swift-standards) itself extends the Swift standard library with the functionality every specification package builds on.
+Where several specifications govern the same subject, a `swift-*-standard` package here
+composes them into one canonical Swift representation. [swift-standards](https://github.com/swift-standards/swift-standards)
+itself extends the Swift standard library with the functionality every specification package
+builds on.
 
-| Package | Role |
-|---|---|
-| [swift-color-standard](https://github.com/swift-standards/swift-color-standard) | Unified color representation across CSS / display profiles |
-| [swift-css-standard](https://github.com/swift-standards/swift-css-standard) | CSS specification — selectors, properties, values |
-| [swift-darwin-standard](https://github.com/swift-standards/swift-darwin-standard) | Darwin platform specification surface |
-| [swift-domain-standard](https://github.com/swift-standards/swift-domain-standard) | Domain name representation (per RFC 1035 et seq.) |
-| [swift-email-standard](https://github.com/swift-standards/swift-email-standard) | Email message format |
-| [swift-emailaddress-standard](https://github.com/swift-standards/swift-emailaddress-standard) | Email address (RFC 5322) |
-| [swift-epub-standard](https://github.com/swift-standards/swift-epub-standard) | EPUB publication format |
-| [swift-html-standard](https://github.com/swift-standards/swift-html-standard) | HTML — unified across W3C historical and WHATWG living standard |
-| [swift-ipv4-standard](https://github.com/swift-standards/swift-ipv4-standard) | IPv4 address |
-| [swift-ipv6-standard](https://github.com/swift-standards/swift-ipv6-standard) | IPv6 address |
-| [swift-json-feed-standard](https://github.com/swift-standards/swift-json-feed-standard) | JSON Feed specification |
-| [swift-locale-standard](https://github.com/swift-standards/swift-locale-standard) | Locale identifier (BCP 47, ISO 639/3166) |
-| [swift-pdf-standard](https://github.com/swift-standards/swift-pdf-standard) | PDF specification (ISO 32000) |
-| [swift-postgresql-standard](https://github.com/swift-standards/swift-postgresql-standard) | PostgreSQL wire/SQL specification |
-| [swift-rss-standard](https://github.com/swift-standards/swift-rss-standard) | RSS specification |
-| [swift-sockets-standard](https://github.com/swift-standards/swift-sockets-standard) | Sockets specification |
-| [swift-svg-standard](https://github.com/swift-standards/swift-svg-standard) | SVG specification |
-| [swift-time-standard](https://github.com/swift-standards/swift-time-standard) | Time representation (ISO 8601 et seq.) |
-| [swift-uri-standard](https://github.com/swift-standards/swift-uri-standard) | URI Generic Syntax (RFC 3986) |
+Use GitHub's native [repository view](https://github.com/orgs/swift-standards/repositories) to
+browse the current package set and each repository's description, or start with the native
+[repositories matching `swift-`](https://github.com/orgs/swift-standards/repositories?q=swift-&type=all)
+and [repositories matching `standard`](https://github.com/orgs/swift-standards/repositories?q=standard&type=all)
+filters. The view can be narrowed further with GitHub's repository search. The
+per-authority organizations above remain the source for specification-specific packages.
 
 ## How to use a package
 
@@ -55,10 +43,6 @@ dependencies: [
 ```
 
 The per-authority organizations follow the same one-repo-per-package convention. See each package's README for current version and Swift requirements.
-
-## Status
-
-Public alpha. Composition packages are under active development; per-authority organizations are live and filling out.
 
 Maintained by [Coen ten Thije Boonkkamp](https://github.com/coenttb) — contributions welcome via pull request.
 
