@@ -24,8 +24,8 @@ readme:
 # Applied via `gh api -X PATCH /orgs/<org>`; no org-level sync workflow exists yet.
 org:
   name: "Swift Standards"
-  description: "Swift implementations of international standards — Layer 2 of the Swift Institute ecosystem."
+  description: "Swift implementations of international standards — Layer 3 of the Swift Institute ecosystem."
   email: "coen@coenttb.com"
-  blog: "https://swift-institute.org"
+  blog: "https://github.com/swift-institute"
   twitter: "coenttb"
   location: "Netherlands"
