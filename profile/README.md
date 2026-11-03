@@ -1,6 +1,6 @@
 # Swift Standards
 
-Swift implementations of international standards and protocols — Layer 2 of the [Swift Institute](https://github.com/swift-institute) ecosystem.
+Swift implementations of international standards and protocols — Layer 3 of the [Swift Institute](https://github.com/swift-institute) ecosystem.
 
 ## What this is
 
@@ -16,14 +16,14 @@ Each standards authority has its own GitHub organization hosting the specificati
 | [swift-iso](https://github.com/swift-iso) | ISO — PDF, EPUB, date and time, locale |
 | [swift-w3c](https://github.com/swift-w3c) | W3C — CSS, SVG |
 | [swift-whatwg](https://github.com/swift-whatwg) | WHATWG — HTML, the URL Living Standard |
-| [swift-ieee](https://github.com/swift-ieee) · [swift-iec](https://github.com/swift-iec) · [swift-ecma](https://github.com/swift-ecma) · [swift-incits](https://github.com/swift-incits) · [swift-arm-ltd](https://github.com/swift-arm-ltd) · [swift-intel](https://github.com/swift-intel) · [swift-microsoft](https://github.com/swift-microsoft) · swift-riscv (pending) | Single-package organizations |
+| [swift-ieee](https://github.com/swift-ieee) · [swift-iec](https://github.com/swift-iec) · [swift-ecma](https://github.com/swift-ecma) · [swift-incits](https://github.com/swift-incits) · [swift-arm-ltd](https://github.com/swift-arm-ltd) · [swift-intel](https://github.com/swift-intel) · [swift-microsoft](https://github.com/swift-microsoft) · [swift-riscv](https://github.com/swift-riscv) · [swift-bipm](https://github.com/swift-bipm) | Single-package organizations |
+| [swift-linux-foundation](https://github.com/swift-linux-foundation) | Linux Foundation — Linux standard, Model Context Protocol |
 
 ## Browse the packages
 
 Where several specifications govern the same subject, a `swift-*-standard` package here
-composes them into one canonical Swift representation. [swift-standards](https://github.com/swift-standards/swift-standards)
-itself extends the Swift standard library with the functionality every specification package
-builds on.
+composes them into one canonical, policy-free Swift representation. It absorbs revisions of
+the underlying specifications, so code that depends on it does not have to change.
 
 Use GitHub's native [repository view](https://github.com/orgs/swift-standards/repositories) to
 browse the current package set and each repository's description, or start with the native
@@ -38,7 +38,7 @@ Each package is a separate Swift Package Manager package with its own repository
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-standards/swift-uri-standard.git", from: "0.1.0")
+    .package(url: "https://github.com/swift-standards/swift-uri-standard.git", branch: "main")
 ]
 ```
 
